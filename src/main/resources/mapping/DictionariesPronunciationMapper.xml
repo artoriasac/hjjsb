@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.dictionaries.DictionariesPronunciationMapper">
+  <resultMap id="BaseResultMap" type="com.model.entity.dictionaries.DictionariesPronunciation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pronunciation" jdbcType="VARCHAR" property="pronunciation" />
+    <result column="dictionaries_id" jdbcType="INTEGER" property="dictionariesId" />
+    <result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
+    <result column="tone" jdbcType="VARCHAR" property="tone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pronunciation, dictionaries_id, pinyin, tone, create_time
+  </sql>
+  <sql id="My_Column_List">
+    id, pronunciation, dictionaries_id dictionariesId, pinyin, tone, create_time createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dictionaries_pronunciation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dictionaries_pronunciation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.entity.dictionaries.DictionariesPronunciation">
+    <selectKey resultType="integer" order="AFTER"  keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dictionaries_pronunciation (id, pronunciation, dictionaries_id, 
+      pinyin, tone, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{pronunciation,jdbcType=VARCHAR}, #{dictionariesId,jdbcType=INTEGER}, 
+      #{pinyin,jdbcType=VARCHAR}, #{tone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.entity.dictionaries.DictionariesPronunciation">
+    insert into dictionaries_pronunciation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pronunciation != null">
+        pronunciation,
+      </if>
+      <if test="dictionariesId != null">
+        dictionaries_id,
+      </if>
+      <if test="pinyin != null">
+        pinyin,
+      </if>
+      <if test="tone != null">
+        tone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pronunciation != null">
+        #{pronunciation,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionariesId != null">
+        #{dictionariesId,jdbcType=INTEGER},
+      </if>
+      <if test="pinyin != null">
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="tone != null">
+        #{tone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.entity.dictionaries.DictionariesPronunciation">
+    update dictionaries_pronunciation
+    <set>
+      <if test="pronunciation != null">
+        pronunciation = #{pronunciation,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionariesId != null">
+        dictionaries_id = #{dictionariesId,jdbcType=INTEGER},
+      </if>
+      <if test="pinyin != null">
+        pinyin = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="tone != null">
+        tone = #{tone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.entity.dictionaries.DictionariesPronunciation">
+    update dictionaries_pronunciation
+    set pronunciation = #{pronunciation,jdbcType=VARCHAR},
+      dictionaries_id = #{dictionariesId,jdbcType=INTEGER},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      tone = #{tone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectDictionariesPronunciation" resultType="com.model.vo.dictionaries.SelectDictionariesPronunciationVO">
+    SELECT
+    <include refid="My_Column_List"/>
+    from dictionaries_pronunciation
+    where dictionaries_id=#{dictionariesId}
+  </select>
+</mapper>

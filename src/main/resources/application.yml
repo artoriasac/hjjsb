@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    include: dev,db,redis
+
+server:
+  port: 9090
+  connection:
+    timeout: 7200
+  servlet:
+    context-path: /hjjsb
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  upport-methods-arguments: true
+  params: count=countSql
+
+
+
+

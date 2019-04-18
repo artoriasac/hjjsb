@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.dictionaries.DictionariesMapper">
+  <resultMap id="BaseResultMap" type="com.model.entity.dictionaries.Dictionaries">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="radicals" jdbcType="VARCHAR" property="radicals" />
+    <result column="stroke" jdbcType="INTEGER" property="stroke" />
+    <result column="shape" jdbcType="VARCHAR" property="shape" />
+    <result column="word" jdbcType="VARCHAR" property="word" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, radicals, stroke, shape, word, create_time
+  </sql>
+  <sql id="My_Column_List">
+    id, radicals, stroke, shape, word, create_time createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dictionaries
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dictionaries
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.entity.dictionaries.Dictionaries">
+    <selectKey order="AFTER" resultType="integer" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dictionaries (id, radicals, stroke, 
+      shape, word, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{radicals,jdbcType=VARCHAR}, #{stroke,jdbcType=INTEGER}, 
+      #{shape,jdbcType=VARCHAR}, #{word,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.entity.dictionaries.Dictionaries">
+    insert into dictionaries
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="radicals != null">
+        radicals,
+      </if>
+      <if test="stroke != null">
+        stroke,
+      </if>
+      <if test="shape != null">
+        shape,
+      </if>
+      <if test="word != null">
+        word,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="radicals != null">
+        #{radicals,jdbcType=VARCHAR},
+      </if>
+      <if test="stroke != null">
+        #{stroke,jdbcType=INTEGER},
+      </if>
+      <if test="shape != null">
+        #{shape,jdbcType=VARCHAR},
+      </if>
+      <if test="word != null">
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.entity.dictionaries.Dictionaries">
+    update dictionaries
+    <set>
+      <if test="radicals != null">
+        radicals = #{radicals,jdbcType=VARCHAR},
+      </if>
+      <if test="stroke != null">
+        stroke = #{stroke,jdbcType=INTEGER},
+      </if>
+      <if test="shape != null">
+        shape = #{shape,jdbcType=VARCHAR},
+      </if>
+      <if test="word != null">
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.entity.dictionaries.Dictionaries">
+    update dictionaries
+    set radicals = #{radicals,jdbcType=VARCHAR},
+      stroke = #{stroke,jdbcType=INTEGER},
+      shape = #{shape,jdbcType=VARCHAR},
+      word = #{word,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByWord" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from dictionaries
+    where word=#{word}
+  </select>
+  <select id="selectDictionaries" resultType="com.model.vo.dictionaries.SelectDictionariesVO">
+    SELECT
+    <include refid="My_Column_List"/>
+    from dictionaries
+    <where>
+      <if test="radicals!=null">
+        and radicals=#{radicals}
+      </if>
+      <if test="shape!=null">
+        and shape=#{shape}
+      </if>
+      <if test="stroke!=null">
+        and stroke=#{stroke}
+      </if>
+      <if test="word!=null">
+        and word=#{word}
+      </if>
+    </where>
+  </select>
+</mapper>
