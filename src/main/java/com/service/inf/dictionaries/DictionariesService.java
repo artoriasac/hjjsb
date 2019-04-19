@@ -20,4 +20,6 @@ public interface DictionariesService {
     DataInfo<SelectDictionariesVO> selectDictionaries(Integer page, Integer pageSize, String shape, String word, String radicals, Integer stroke);
 
     SelectDictionariesDetailsVO selectDictionariesInfoVO(Integer dictionariesId);
+
+    Dictionaries selectById(Integer id);
 }

@@ -108,4 +108,9 @@ public class DictionariesServiceImpl implements DictionariesService {
         result.setList(pronunciationVOList);
         return result;
     }
+
+    @Override
+    public Dictionaries selectById(Integer id) {
+        return dictionariesMapper.selectByPrimaryKey(id);
+    }
 }
