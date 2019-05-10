@@ -30,11 +30,11 @@ public class Swagger2  {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 文档标题
-                .title("artorias api")
+                .title("static api")
                 // 文档描述
-                .description("artorias api")
+                .description("某傻逼黄氏的需求，真的蠢，别看，会死，任何设定与作者无关")
                 .termsOfServiceUrl("https://github.com")
-                .version("v1")
+                .version("v1.0.0.sb")
                 .build();
     }
 
