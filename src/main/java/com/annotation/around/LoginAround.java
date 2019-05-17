@@ -18,10 +18,7 @@ public class LoginAround {
         try{
             MemberInfo memberInfo = MemberUtils.getMemberInfo();
             if (memberInfo==null){
-                memberInfo=new MemberInfo();
-                memberInfo.setId(1);
-                memberInfo.setNickname("sbhjj");
-                MemberUtils.setMemberInfo(memberInfo);
+                return new Result<>("600","未登录");
             }
             return joinPoint.proceed();
         }catch (Exception t){

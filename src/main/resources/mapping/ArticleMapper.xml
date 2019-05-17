@@ -23,7 +23,7 @@
   </delete>
   <insert id="insert" parameterType="com.model.entity.article.Article">
     <selectKey order="AFTER" keyProperty="id" resultType="integer">
-      SELECT LAST_INSERT_ID()
+    SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article (id, title, user_id, 
       content, create_time)

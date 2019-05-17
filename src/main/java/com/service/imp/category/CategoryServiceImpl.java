@@ -77,9 +77,6 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryVO selectCategory(Integer categoryId) {
         CategoryVO result=new CategoryVO();
         Category category = categoryMapper.selectByPrimaryKey(categoryId);
-        if (category==null){
-            throw new ServiceException("你是傻逼吧");
-        }
         result.setContent(category.getContent());
         List<ArticleListVO> articleListVOS = articleMapper.selectArticleList(null, null, categoryId);
         result.setList(articleListVOS);

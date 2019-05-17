@@ -46,7 +46,7 @@ public class CategoryController {
     @Login
     @GetMapping("selectCategory")
     @ApiOperation("查询分类详情")
-    public Result selectCategory(@RequestParam(required = false) Integer categoryId){
+    public Result selectCategory(@RequestParam Integer categoryId){
         CategoryVO result=categoryService.selectCategory(categoryId);
         return new Result(result);
     }
